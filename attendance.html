@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="static/attendance.css" type="text/css">
+    <script src="fetch.js" defer></script>
+</head>
+<body>
+<div class="top">Take Attendance System !</div>
+<div class="currDate">20-Jan-2023</div>
+<a href=/logout><button type="button" class="logoutbtn">Logout</button></a>
+<a href=/index><button type="button" class="mainPagebtn">Go to main Page</button></a>
+    <div class="container">
+        <h1>Attendance List</h1>
+        
+        <div class="scrollit">
+          <table id="showData" border="4"></table>
+        </div>
+        
+        <button id="get-attendance-btn" class="attendancebtn">Get Data</button>
+        <button onclick="tableFromJson()" class="attendancebtn">List Attendance</button>
+        <button id="send-fingerprint-btn" class="attendancebtn">Upload Fingerprint</button>
+        <button type="button" onclick="tableToCSV()">Download .CSV File</button>
+        <input type="file" id="myfile" name="myfile">
+    </div>
+</body>
+</html>
