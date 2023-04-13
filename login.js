@@ -18,15 +18,21 @@ const sendHttpRequest = (method, url, data) => {
       });
     }
     return response.json();
+  })
+  .then(result => {
+    if(result.message === "SUCCESS"){
+      alert("You are logged in.");
+      getData(); // Call getData after successful login
+      this.goToMain();
+      } else {
+         alert("Please check your login information.");
+      }
   });
 };
-var myBooks;
+
 const getData = () => {
   sendHttpRequest('GET', 'http://localhost:8081/attendance/list  ').then(responseData => {
     console.log(responseData);
-    //myBooks = JSON.stringify(responseData, null, 2);
-    myBooks = responseData.matchedStudents;
-    console.log(myBooks);
   });
 };
 
@@ -43,5 +49,4 @@ const sendData = () => {
       });
   };
 
-getBtn.addEventListener('click', getData);
 postBtn.addEventListener('click', sendData);

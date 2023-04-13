@@ -31,28 +31,6 @@ const getData = () => {
 };
 
 let tableFromJson = () => {
-  // the json data.
-  const myBooks2 = [
-          {
-              "studentNumber": 3,
-              "name": "neymar",
-              "surname": "jr",
-              "timestamp": "2022-12-30T19:16:31"
-          },
-          {
-              "studentNumber": 1,
-              "name": "lionel",
-              "surname": "messi",
-              "timestamp": "2022-12-30T19:16:34"
-          },
-          {
-              "studentNumber": 2,
-              "name": "christiano",
-              "surname": "ronaldo",
-              "timestamp": "2022-12-30T19:16:35"
-          }
-  
-  ]
   // Extract value from table header. 
   let col = [];
   for (let i = 0; i < myBooks.length; i++) {
