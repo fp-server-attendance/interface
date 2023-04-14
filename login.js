@@ -23,7 +23,16 @@ const sendHttpRequest = (method, url, data) => {
     if(result.message === "SUCCESS"){
       alert("You are logged in.");
       getData(); // Call getData after successful login
-      this.goToMain();
+
+      // after gettin data from server
+      // navigate to attendance.html file
+      const form = document.getElementById("login-form");
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // prevent default form submission behavior
+            window.location.href = "attendance.html"; // navigate to attendance.html
+        });
+
+
       } else {
          alert("Please check your login information.");
       }
