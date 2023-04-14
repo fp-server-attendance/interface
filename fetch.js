@@ -1,3 +1,9 @@
+window.addEventListener('load', function () {
+  const currDate = document.getElementById("currDate");
+  const date = new Date();
+  currDate.innerHTML = date.toLocaleDateString();
+});
+
 const getBtn = document.getElementById('get-attendance-btn');
 const postBtn = document.getElementById('send-fingerprint-btn');
 
