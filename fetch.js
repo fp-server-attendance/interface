@@ -28,7 +28,7 @@ const sendHttpRequest = (method, url, data) => {
 };
 var myBooks;
 const getData = () => {
-  sendHttpRequest('GET', 'http://localhost:8081/attendance/list  ').then(responseData => {
+  sendHttpRequest('GET', 'http://localhost:8081/attendance/list').then(responseData => {
     console.log(responseData);
     //myBooks = JSON.stringify(responseData, null, 2);
     myBooks = responseData.matchedStudents;
