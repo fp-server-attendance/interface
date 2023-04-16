@@ -70,9 +70,9 @@ button{
     content: counter(tableCount);
     counter-increment: tableCount;
 }
-.scrollit {
-    background-color: white;
-    color: black;
-    overflow:scroll;
-    height:250px;
-}
+.course-container {
+    background-color: rgb(37, 150, 190);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
