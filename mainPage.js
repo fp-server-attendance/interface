@@ -28,8 +28,10 @@ const sendHttpRequest = (method, url, data) => {
   });
 };
 
+const { username, sessionId } = getQueryParams();
+
 const getData = () => {
-  sendHttpRequest('GET', 'http://ec2-3-84-60-94.compute-1.amazonaws.com:8080/teacher/courses?teacherUserName=seraslan&semester=fall&year=2023')
+  sendHttpRequest('GET', `http://54.227.120.179:8080/teacher/courses?teacherUserName=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(sessionId)}&semester=fall&sectionYear=2023`)
   .then(responseData => {
     console.log(responseData);
     const courseData = responseData.courses;
@@ -72,4 +74,15 @@ const getData = () => {
 
 function goToAttendancePage() {
   window.location.href = "./attendance.html";
+}
+
+// get login parameters from login.js and use it here to get the courses of a user
+function getQueryParams() {
+  const search = window.location.search.substring(1);
+  const queryParams = new URLSearchParams(search);
+
+  return {
+    username: queryParams.get('username'),
+    sessionId: queryParams.get('sessionId')
+  };
 }
