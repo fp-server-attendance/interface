@@ -1,8 +1,6 @@
 const getBtn = document.getElementById('get-lecture-btn');
 const postBtn = document.getElementById('send-login-btn');
 
-//const jsonToTable = require('json-to-table');
-
 const sendHttpRequest = (method, url, data) => {
   return fetch(url, {
     method: method,
@@ -10,7 +8,6 @@ const sendHttpRequest = (method, url, data) => {
     headers: data ? { 'Content-Type': 'application/json' } : {}
   }).then(response => {
     if (response.status >= 400) {
-      // !response.ok
       return response.json().then(errResData => {
         const error = new Error('Something went wrong!');
         error.data = errResData;
@@ -18,44 +15,41 @@ const sendHttpRequest = (method, url, data) => {
       });
     }
     return response.json();
-  })
-  .then(result => {
-    if(result.message === "SUCCESS"){
-      alert("You are logged in.");
-      getData(); // Call getData after successful login
-
-      // after gettin data from server
-      // navigate to attendance.html file
-      const form = document.getElementById("login-form");
-        form.addEventListener("submit", function(event) {
-            event.preventDefault(); // prevent default form submission behavior
-            window.location.href = "attendance.html"; // navigate to attendance.html
-        });
-
-
-      } else {
-         alert("Please check your login information.");
-      }
   });
 };
 
 const getData = () => {
-  sendHttpRequest('GET', 'http://localhost:8081/attendance/list  ').then(responseData => {
+  sendHttpRequest('GET', '54.227.120.179:8080/teacher/courses').then(responseData => {
     console.log(responseData);
   });
 };
 
-const sendData = () => {
-    sendHttpRequest('POST', 'http://localhost:8081/attendance/schedule', {
-      login: 'test1',
-      password: '123'
+const sendData = (username, password) => {
+  sendHttpRequest('POST', 'http://54.227.120.179:8080/teacher/authenticate', {
+    username: username,
+    password: password
+  })
+    .then(responseData => {
+      if (responseData.success) {
+        console.log(responseData.sessionId);
+        alert('You are logged in.');
+        localStorage.setItem('sessionId', responseData.sessionId);
+        // directing to mainPage with user credentials if login is succesfull
+        window.location.href = './mainPage.html?username=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(responseData.sessionId)}';
+      } else {
+        alert('Please check your login information.');
+      }
     })
-      .then(responseData => {
-        console.log(responseData);
-      })
-      .catch(err => {
-        console.log(err, err.data);
-      });
-  };
+    .catch(err => {
+      console.log(err, err.data);
+    });
+};
 
-postBtn.addEventListener('click', sendData);
+postBtn.addEventListener('click', (event) => {
+  event.preventDefault();
+
+  const usernameInput = document.querySelector('input[name="username"]');
+  const passwordInput = document.querySelector('input[name="password"]');
+
+  sendData(usernameInput.value, passwordInput.value);
+});
