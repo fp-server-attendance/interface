@@ -18,24 +18,22 @@ const sendHttpRequest = (method, url, data) => {
   });
 };
 
-const getData = () => {
-  sendHttpRequest('GET', '54.227.120.179:8080/teacher/courses').then(responseData => {
-    console.log(responseData);
-  });
-};
-
-const sendData = (username, password) => {
-  sendHttpRequest('POST', 'http://54.227.120.179:8080/teacher/authenticate', {
+const sendData = (username, password, cpassword, fName, lName, email) => {
+  sendHttpRequest('POST', 'http://54.227.120.179:8080/teacher/add', {
     username: username,
-    password: password
+    password: password,
+    cpassword: cpassword,
+    fName: fName,
+    lName: lName,
+    email: email
+
   })
     .then(responseData => {
       if (responseData.success) {
         console.log(responseData.sessionId);
-        alert('You are logged in.');
-        localStorage.setItem('sessionId', responseData.sessionId);
-        // directing to mainPage with user credentials if login is succesfull
-        window.location.href = './mainPage.html?username=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(responseData.sessionId)}';
+        alert('You are signed up.');
+        // directing to login page with user credentials if register is succesfull
+        window.location.href = './login.html';
       } else {
         alert('Please check your login information.');
       }
@@ -45,6 +43,7 @@ const sendData = (username, password) => {
     });
 };
 
+// get data from html page
 postBtn.addEventListener('click', (event) => {
   event.preventDefault();
 
@@ -54,6 +53,6 @@ postBtn.addEventListener('click', (event) => {
   const firstnameInput = document.querySelector('input[name="firstname"]');
   const lastnameInput = document.querySelector('input[name="lastname"]');
   const emailInput = document.querySelector('input[name="email"]');
-
-  sendData(usernameInput.value, passwordInput.value);
+  // send data to sendData
+  sendData(usernameInput.value, passwordInput.value, confirmpasswordInput.value, firstnameInput.value, lastnameInput.value, emailInput.value);
 });
