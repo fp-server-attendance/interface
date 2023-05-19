@@ -1,0 +1,138 @@
+html, body {
+    margin: 0; padding: 0; border: 0;
+}
+body {
+    background-color: #BFBFBF
+}
+.top {
+    position: fixed;
+    padding: 30px;
+    width: 100%;
+    font-weight: bold;
+    height: 3%;
+    top: 0;
+    background: #333E50;
+    font-size: 25px;
+    color: white;
+}
+.currDate{
+    font-size: 20px;
+    color: white;
+    position: fixed;
+    top: 90%;
+    width: 100%;
+    padding: 25px;
+    bottom: 0;
+    background: #333E50;
+}
+.container {
+    color: white;
+    font-size: 20px;
+    padding: 25px;
+    background-color: #BFBFBF;
+    border: 3px solid black;
+    width: 20%; 
+    height: 25%; 
+    box-sizing: border-box;
+    position: fixed;
+}
+
+.top-left {
+    top: 150px; 
+    left: 380px; 
+}
+
+.top-right {
+    top: 150px;
+    right: 380px; 
+}
+
+.bottom-left {
+    bottom: 150px;
+    left: 380px;
+}
+
+.bottom-right {
+    bottom: 150px; 
+    right: 380px; 
+}
+
+.pHeaders {
+    background-color: #333E50; 
+    color: white;
+    padding: 10px;
+    border-radius: 15px; 
+    position: absolute; 
+    top: -40px; 
+    left: 10px;
+}
+p{
+    color: #333E50;
+}
+
+button{
+    background-color: #AD0E24;
+    color: white;
+    width: auto;
+    padding: 10px 18px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.containerButton{
+    background-color: #AD0E24;
+    color: white;
+    width: auto;
+    padding: 10px 18px;
+    margin: 10px 0;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0px;
+    left: 20px;
+}
+
+
+input[type=text], input[type=password] {
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 2px solid #BFBFBF;
+    box-sizing: border-box;
+}
+button:hover{
+    opacity: 0.75;
+}
+
+.logoutbtn{
+    line-height: 12px;
+    width: 100px;
+    font-size: 15px;
+    font-family: tahoma;
+    margin-top: 1px;
+    margin-right: 2px;
+    position:fixed;
+    top:3%;
+    right:3%;
+}
+.mainPagebtn{
+    line-height: 12px;
+    width: 150px;
+    font-size: 15px;
+    font-family: tahoma;
+    margin-top: 1px;
+    margin-right: 2px;
+    position:fixed;
+    top:3%;
+    right:10%;
+}
+.counterCell:before {
+    content: counter(tableCount);
+    counter-increment: tableCount;
+}
+.scrollit {
+    background-color: white;
+    color: black;
+    overflow:scroll;
+    height:250px;
+}
