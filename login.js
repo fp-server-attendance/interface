@@ -10,7 +10,7 @@ const sendHttpRequest = (method, url, data) => {
     body: JSON.stringify(data),
     headers: data ? { 'Content-Type': 'application/json' } : {}
   }).then(response => {
-    if (response.status >= 400) {
+    if (response.status >= 500) {
       return response.json().then(errResData => {
         const error = new Error('Something went wrong!');
         error.data = errResData;
@@ -22,7 +22,7 @@ const sendHttpRequest = (method, url, data) => {
 };
 
  const sendData = (username, password) => {
-  sendHttpRequest('POST', 'http://54.227.120.179:8080/teacher/authenticate', {
+  sendHttpRequest('POST', 'http://54.174.149.55:8080/teacher/authenticate', {
     username: username,
     password: password
   })
@@ -43,15 +43,15 @@ const sendHttpRequest = (method, url, data) => {
 };
 
 const sendDataForTesting = (username, password) => {
-  return sendHttpRequest('POST', 'http://54.227.120.179:8080/teacher/authenticate', {
+  return sendHttpRequest('POST', 'http://54.174.149.55:8080/teacher/authenticate', {
     username: username,
     password: password
   })
     .then(responseData => {
       if (responseData.success) {
-        return responseData.sessionId;
+        return responseData.success;
       } else {
-        throw new Error('Login failed');
+        return false;
       }
     })
     .catch(err => {

@@ -31,7 +31,7 @@ const sendHttpRequest = (method, url, data) => {
 const { username, sessionId } = getQueryParams();
 
 const getData = () => {
-  sendHttpRequest('GET', `http://54.227.120.179:8080/teacher/courses?teacherUserName=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(sessionId)}&semester=fall&sectionYear=2023`)
+  sendHttpRequest('GET', `http://54.174.149.55:8080:8080/teacher/courses?teacherUserName=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(sessionId)}&semester=fall&sectionYear=2023`)
   .then(responseData => {
     console.log(responseData);
     const courseData = responseData.courses;

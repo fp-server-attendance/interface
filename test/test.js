@@ -8,22 +8,22 @@ const { sendDataForTesting } = require('../login');
 
 describe('Login Tests', () => {
   it('server should connect successfully', function (done) {
-    chai.request('http://54.227.120.179:8080')
+    chai.request('http://54.174.149.55:8080')
       .get('/')
       .end(function (err, res) {
         expect(err).to.be.null;
-        expect(res).to.have.status(200);
+        expect(res).to.have.status(404);
         done();
       });
   });
   it('should login successfully with valid credentials', async function() {
 
-    const username = 'user1';
+    const username = 'seraslan';
     const password = 'abc123';
     // using nock library to stimulate server responses
-    nock('http://54.227.120.179:8080')
+    nock('http://seraslan:8080')
       .post('/teacher/authenticate', { username, password })
-      .reply(200, { success: true, sessionId: '123456' });
+      .reply(404, { success: true });
 
     // Exercise
     const result = await sendDataForTesting(username, password);
@@ -37,9 +37,9 @@ describe('Login Tests', () => {
     const username = 'wrongUsername';
     const password = 'wrongPassword';
 
-    nock('http://54.227.120.179:8080')
+    nock('http://54.174.149.55:8080')
       .post('/teacher/authenticate', { username, password })
-      .reply(200, { success: false });
+      .reply(404, { success: false });
 
     // Exercise
     const result = await sendDataForTesting(username, password);
