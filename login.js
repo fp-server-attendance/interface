@@ -1,5 +1,8 @@
-const getBtn = document.getElementById('get-lecture-btn');
-const postBtn = document.getElementById('send-login-btn');
+module.exports = function(document) {
+  // Now you can use the document object here
+  const postBtn = document.getElementById('send-login-btn');
+  // ...
+}
 
 const sendHttpRequest = (method, url, data) => {
   return fetch(url, {
@@ -18,13 +21,7 @@ const sendHttpRequest = (method, url, data) => {
   });
 };
 
-const getData = () => {
-  sendHttpRequest('GET', '54.227.120.179:8080/teacher/courses').then(responseData => {
-    console.log(responseData);
-  });
-};
-
-const sendData = (username, password) => {
+ const sendData = (username, password) => {
   sendHttpRequest('POST', 'http://54.227.120.179:8080/teacher/authenticate', {
     username: username,
     password: password
@@ -45,6 +42,24 @@ const sendData = (username, password) => {
     });
 };
 
+const sendDataForTesting = (username, password) => {
+  return sendHttpRequest('POST', 'http://54.227.120.179:8080/teacher/authenticate', {
+    username: username,
+    password: password
+  })
+    .then(responseData => {
+      if (responseData.success) {
+        return responseData.sessionId;
+      } else {
+        throw new Error('Login failed');
+      }
+    })
+    .catch(err => {
+      console.log(err, err.data);
+      throw err;
+    });
+};
+module.exports = function(postBtn) {
 postBtn.addEventListener('click', (event) => {
   event.preventDefault();
 
@@ -53,3 +68,9 @@ postBtn.addEventListener('click', (event) => {
 
   sendData(usernameInput.value, passwordInput.value);
 });
+}
+module.exports = {
+  sendHttpRequest,
+  sendData,
+  sendDataForTesting
+};

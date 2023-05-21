@@ -1,23 +1,23 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-        <link rel="stylesheet" href="../static/style.css" type="text/css">
-        <script src="../login.js" defer></script>
-    </head>
-    <body>
-        <div class="top">Welcome to the Fingerprint Based Attendance System !</div>
-        <form action="/login" method="POST">
-            <div class="container">
-                <label>Username : </label>
-                <input type="text" placeholder="Enter Username" name="username" required>
-                <label>Password : </label>
-                <input type="password" placeholder="Enter Password" name="password" required>
-                <button id="send-login-btn" type="submit" class="loginbtn">Login</button>
-                <a href="register.html"><button type="button" class="registerbtn">Register</button></a>
-                <!-- <div class="msg">{{ msg }}</div> -->
-            </div>
-        </form>
-    </body>
-    </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/style.css" type="text/css">
+    <script src="../login.js" defer></script>
+</head>
+<body>
+    <div class="top">Welcome to the Fingerprint Based Attendance System !</div>
+    <form action="/login" method="POST">
+        <div class="container">
+            <label>Username : </label>
+            <input type="text" placeholder="Enter Username" name="username" required>
+            <label>Password : </label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+            <button id="send-login-btn" type="submit" class="loginbtn">Login</button>
+            <a href="register.html"><button type="button" class="registerbtn">Register</button></a>
+            <!-- <div class="msg">{{ msg }}</div> -->
+        </div>
+    </form>
+</body>
+</html>
