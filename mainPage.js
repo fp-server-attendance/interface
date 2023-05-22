@@ -14,25 +14,29 @@ const sendHttpRequest = (method, url, data) => {
     body: JSON.stringify(data),
     headers: data ? { 'Content-Type': 'application/json' } : {}
   }).then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
+    if (response.status >= 500) {
+      return response.json().then(errResData => {
+        const error = new Error('Something went wrong!');
+        error.data = errResData;
+        throw error;
+      });
     }
-    return response.json().then(jsonData => {
-      if (!jsonData || Object.keys(jsonData).length === 0) {
-        throw new Error('Empty response or invalid JSON');
-      }
-      return jsonData;
-    });
-  }).catch(error => {
-    console.error('Error:', error);
+    return response.json();
   });
 };
 
 const { username, sessionId } = getQueryParams();
 
 const getData = () => {
-  sendHttpRequest('GET', `http://54.174.149.55:8080:8080/teacher/courses?teacherUserName=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(sessionId)}&semester=fall&sectionYear=2023`)
+  const data = {
+    sectionYear: '2023',
+    semester: 'fall',
+    teacherUserName: username,
+    sessionId: sessionId
+  };
+  sendHttpRequest('POST', `http://54.174.149.55:8080/teacher/courses`, data)
   .then(responseData => {
+    console.log(username, sessionId)
     console.log(responseData);
     const courseData = responseData.courses;
 
