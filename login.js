@@ -1,8 +1,8 @@
-module.exports = function(document) {
-  // Now you can use the document object here
-  const postBtn = document.getElementById('send-login-btn');
-  // ...
-}
+
+// Now you can use the document object here
+const postBtn = document.getElementById('send-login-btn');
+// ...
+
 
 const sendHttpRequest = (method, url, data) => {
   return fetch(url, {
@@ -32,8 +32,9 @@ const sendHttpRequest = (method, url, data) => {
         alert('You are logged in.');
         localStorage.setItem('sessionId', responseData.sessionId);
         // directing to mainPage with user credentials if login is succesfull
-        window.location.href = './mainPage.html?username=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(responseData.sessionId)}';
+        window.location.href = `./mainPage.html?username=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(responseData.sessionId)}`;
       } else {
+        throw new Error("Please check your login information.");
         alert('Please check your login information.');
       }
     })
@@ -59,7 +60,7 @@ const sendDataForTesting = (username, password) => {
       throw err;
     });
 };
-module.exports = function(postBtn) {
+
 postBtn.addEventListener('click', (event) => {
   event.preventDefault();
 
@@ -68,7 +69,7 @@ postBtn.addEventListener('click', (event) => {
 
   sendData(usernameInput.value, passwordInput.value);
 });
-}
+
 module.exports = {
   sendHttpRequest,
   sendData,
