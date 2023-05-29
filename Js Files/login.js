@@ -3,7 +3,6 @@
 const postBtn = document.getElementById('send-login-btn');
 // ...
 
-
 const sendHttpRequest = (method, url, data) => {
   return fetch(url, {
     method: method,
@@ -22,7 +21,7 @@ const sendHttpRequest = (method, url, data) => {
 };
 
  const sendData = (username, password) => {
-  sendHttpRequest('POST', 'http://54.174.149.55:8080/teacher/authenticate', {
+  sendHttpRequest('POST', 'http://44.203.249.113:8080/teacher/authenticate', {
     username: username,
     password: password
   })
@@ -43,24 +42,6 @@ const sendHttpRequest = (method, url, data) => {
     });
 };
 
-const sendDataForTesting = (username, password) => {
-  return sendHttpRequest('POST', 'http://54.174.149.55:8080/teacher/authenticate', {
-    username: username,
-    password: password
-  })
-    .then(responseData => {
-      if (responseData.success) {
-        return responseData.success;
-      } else {
-        return false;
-      }
-    })
-    .catch(err => {
-      console.log(err, err.data);
-      throw err;
-    });
-};
-
 postBtn.addEventListener('click', (event) => {
   event.preventDefault();
 
@@ -69,9 +50,3 @@ postBtn.addEventListener('click', (event) => {
 
   sendData(usernameInput.value, passwordInput.value);
 });
-
-module.exports = {
-  sendHttpRequest,
-  sendData,
-  sendDataForTesting
-};

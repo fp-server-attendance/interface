@@ -31,11 +31,11 @@ const { username, sessionId } = getQueryParams();
 const getData = () => {
   const data = {
     sectionYear: '2023',
-    semester: 'fall',
+    semester: 'SPRING',
     teacherUserName: username,
     sessionId: sessionId
   };
-  sendHttpRequest('POST', `http://54.174.149.55:8080/teacher/courses`, data)
+  sendHttpRequest('POST', `http://44.203.249.113:8080/teacher/courses`, data)
   .then(responseData => {
     console.log(username, sessionId)
     console.log(responseData);
@@ -78,7 +78,7 @@ const getData = () => {
 };
 
 function goToAttendancePage() {
-  window.location.href = "./attendance.html";
+  window.location.href = `./attendance.html?username=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(sessionId)}`;
 }
 
 // get login parameters from login.js and use it here to get the courses of a user
