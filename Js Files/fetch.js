@@ -31,7 +31,7 @@ const sendHttpRequest = (method, url, data) => {
 };
 var myBooks;
 const getData = () => {
-  sendHttpRequest('GET', 'http://54.174.149.55:8080/attendance/list').then(responseData => {
+  sendHttpRequest('POST', 'http://44.203.249.113:8080/attendance/get_details').then(responseData => {
     console.log(responseData);
     //myBooks = JSON.stringify(responseData, null, 2);
     myBooks = responseData.matchedStudents;
