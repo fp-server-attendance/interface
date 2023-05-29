@@ -6,6 +6,8 @@ window.addEventListener('load', function () {
 
 const postBtn = document.getElementById('send-fingerprint-btn');
 
+const { username, sessionId } = getQueryParams();
+
 let intervalId = null;
 const toggleSwitch = document.getElementById('toggle-switch');
 const switchStatus = document.getElementById('switch-status');
@@ -30,13 +32,22 @@ const sendHttpRequest = (method, url, data) => {
   });
 };
 var myBooks;
+
 const getData = () => {
-  sendHttpRequest('POST', 'http://44.203.249.113:8080/attendance/get_details').then(responseData => {
-    console.log(responseData);
-    //myBooks = JSON.stringify(responseData, null, 2);
-    myBooks = responseData.matchedStudents;
-    console.log(myBooks);
-  });
+  sendHttpRequest('POST', 'http://44.203.249.113:8080/attendance/get_details', {
+      attendanceId: 1,
+      teacherUserName: username,
+      sessionId: sessionId
+  })
+    .then(responseData => {
+      console.log(responseData);
+      //myBooks = JSON.stringify(responseData, null, 2);
+      myBooks = responseData.matchedStudentList;
+      console.log(myBooks);
+    })
+    .catch(err => {
+      console.log(err, err.data);
+    });
 };
 
 toggleSwitch.addEventListener('change', () => {
@@ -67,38 +78,38 @@ let tableFromJson = () => {
     }
   }
 
-  // Create table.
-  const table = document.createElement("table");
+// Create table.
+const table = document.createElement("table");
 
-  // Create table header row using the extracted headers above.
-  let tr = table.insertRow(-1);                   // table row.
+// Create table header row using the extracted headers above.
+let tr = table.insertRow(-1);                   // table row.
 
-  for (let i = 0; i < col.length; i++) {
+for (let i = 0; i < col.length; i++) {
     let th = document.createElement("th");      // table header.
     th.innerHTML = col[i];
     tr.appendChild(th);
+}
+
+// add json data to the table as rows.
+for (let i = 0; i < myBooks.length; i++) {
+
+  tr = table.insertRow(-1);
+
+  for (let j = 0; j < col.length; j++) {
+    let tabCell = tr.insertCell(-1);
+    tabCell.innerHTML = myBooks[i][col[j]];
   }
+}
 
-  // add json data to the table as rows.
-  for (let i = 0; i < myBooks.length; i++) {
-
-    tr = table.insertRow(-1);
-
-    for (let j = 0; j < col.length; j++) {
-      let tabCell = tr.insertCell(-1);
-      tabCell.innerHTML = myBooks[i][col[j]];
-    }
-  }
-
-  // Now, add the newly created table with json data, to a container.
-  const divShowData = document.getElementById('showData');
-  divShowData.innerHTML = "";
-  divShowData.appendChild(table);
+// Now, add the newly created table with json data, to a container.
+const divShowData = document.getElementById('showData');
+divShowData.innerHTML = "";
+divShowData.appendChild(table);
 }
 
 // Converting file to base64string to send to the server
 // Get a reference to the file input
-const fileInput = document.querySelector('input');
+const fileInput = document.getElementById('myfile');
 var base64String;
 // Listen for the change event so we can capture the file
 fileInput.addEventListener('change', (e) => {
@@ -193,5 +204,17 @@ function downloadCSVFile(csv_data) {
   temp_link.click();
   document.body.removeChild(temp_link);
 }
+
+function getQueryParams() {
+  const search = window.location.search.substring(1);
+  const queryParams = new URLSearchParams(search);
+
+  return {
+    username: queryParams.get('username'),
+    sessionId: queryParams.get('sessionId')
+  };
+}
+
+
 
 postBtn.addEventListener('click', sendData);
