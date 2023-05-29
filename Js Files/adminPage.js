@@ -3,12 +3,12 @@ window.addEventListener('load', function () {
     const date = new Date();
     currDate.innerHTML = date.toLocaleDateString();
 
-    getData();
 });
 
 const goStudentbtn = document.getElementById('go-addStudent-btn');
 const goLecturebtn = document.getElementById('go-addLecture-btn');
 const goInstructorbtn = document.getElementById('go-addInstructor-btn');
+const goMainPagebtn = document.getElementById('go-mainPage-btn');
 
 const { username, sessionId } = getQueryParams();
 
@@ -37,4 +37,9 @@ goLecturebtn.addEventListener('click', (event) => {
 goInstructorbtn.addEventListener('click', (event) => {
   event.preventDefault();
   window.location.href = `./addInstructor.html?username=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(sessionId)}`;
+});
+
+goMainPagebtn.addEventListener('click', (event) => {
+  event.preventDefault();
+  window.location.href = `./mainPage.html?username=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(sessionId)}`;
 });
