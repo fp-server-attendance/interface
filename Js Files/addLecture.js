@@ -3,7 +3,6 @@ window.addEventListener('load', function () {
     const date = new Date();
     currDate.innerHTML = date.toLocaleDateString();
 
-    getData();
   });
 
 const submitBtn = document.getElementById('submitStudent-btn');
@@ -27,7 +26,7 @@ const sendHttpRequest = (method, url, data) => {
       body: JSON.stringify(data),
       headers: data ? { 'Content-Type': 'application/json' } : {}
     }).then(response => {
-      if (response.status >= 400) {
+      if (response.status >= 500) {
         // !response.ok
         return response.json().then(errResData => {
           const error = new Error('Something went wrong!');
@@ -40,11 +39,11 @@ const sendHttpRequest = (method, url, data) => {
 };
 
 const sendData = (coursecode, department, coursename) => {
-    sendHttpRequest('POST', 'http://54.174.149.55:8080/attendance/schedule', {
-        coursecode: coursecode,
+    sendHttpRequest('POST', 'http://44.203.249.113:8080/course/add', {
+        courseCode: coursecode,
         department: department,
-        coursename: coursename,
-        adminUserName: adminUserName,
+        name: coursename,
+        adminUserName: username,
         sessionId: sessionId
     })
       .then(responseData => {
@@ -74,5 +73,6 @@ submitBtn.addEventListener('click', (event) => {
     const departmentInput = document.querySelector('input[name="department"]');
     const courseNameInput = document.querySelector('input[name="courseName"]');
     // send data to sendData
+
     sendData(courseCodeInput.value, departmentInput.value, courseNameInput.value);
 });
