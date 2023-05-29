@@ -7,17 +7,19 @@ var assert = chai.assert;
 // using nock library to stimulate server responses
 const nock = require('nock');
 // functions in login.js
-const { sendDataForTesting } = require('../testLogin');
-const { sendData } = require('../testLogin');
+const { sendDataForTesting } = require('../Test Js Files/testLogin');
+const { sendData } = require('../Test Js Files/testLogin');
 // functions in mainPage.js
-const { getData } = require('../testMainPage');
-const { getDataForTesting } = require('../testMainPage');
+const { getData } = require('../Test Js Files/testMainPage');
+const { getDataForTesting } = require('../Test Js Files/testMainPage');
+
+const serverIP = 'http://44.203.249.113:8080';
 
 
 const sessionIdTest = "";
 describe('Login Tests', () => {
   it('server should connect successfully', function (done) {
-    chai.request('http://3.226.237.9:8080')
+    chai.request(serverIP)
       .get('/')
       .end(function (err, res) {
         expect(err).to.be.null;
@@ -30,7 +32,7 @@ describe('Login Tests', () => {
     const username = 'seraslan';
     const password = 'abc123';
     // using nock library to stimulate server responses
-    nock('http://3.226.237.9:8080')
+    nock(serverIP)
       .post('/teacher/authenticate', { username, password })
       .reply(404, { success: true });
     
@@ -45,7 +47,7 @@ describe('Login Tests', () => {
     const username = 'wrongUsername';
     const password = 'wrongPassword';
 
-    nock('http://3.226.237.9:8080')
+    nock(serverIP)
       .post('/teacher/authenticate', { username, password })
       .reply(404, { success: false });
 
@@ -61,7 +63,7 @@ describe('Login Tests', () => {
     const username = 'wrongUsername';
     const password = 'wrongPassword';
 
-    nock('http://3.226.237.9:8080')
+    nock(serverIP)
       .post('/teacher/authenticate', { username, password })
       .reply(404, { success: false });
 
@@ -76,7 +78,7 @@ describe('Login Tests', () => {
 });
 describe('Main Page Tests', () => {
   it('server should connect successfully', function (done) {
-    chai.request('http://3.226.237.9:8080')
+    chai.request(serverIP)
       .get('/')
       .end(function (err, res) {
         expect(err).to.be.null;
@@ -91,7 +93,7 @@ describe('Main Page Tests', () => {
     const sessionId = "4ed0f6ca-31ef-41c3-9e57-fac3b9a8297e";
 
     // using nock library to stimulate server responses
-    nock('http://3.226.237.9:8080')
+    nock(serverIP)
       .post('/teacher/courses', {sectionYear, semester, teacherUserName, sessionId})
       .reply(404, { success: true });
 
@@ -109,7 +111,7 @@ describe('Main Page Tests', () => {
     const sessionId = "c07f3e4f-9efe-4de2-abc0-40ecd84f4b74";
 
     // using nock library to stimulate server responses
-    nock('http://3.226.237.9:8080')
+    nock(serverIP)
       .post('/teacher/courses', {sectionYear, semester, teacherUserName, sessionId})
       .reply(404, { success: false });
 
