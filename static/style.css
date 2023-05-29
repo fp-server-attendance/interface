@@ -112,3 +112,13 @@ table {
 .msg{
     color: red;
 }
+.currDate{
+    font-size: 20px;
+    color: white;
+    position: fixed;
+    top: 90%;
+    width: 100%;
+    padding: 25px;
+    bottom: 0;
+    background: #333E50;
+}
