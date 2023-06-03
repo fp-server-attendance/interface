@@ -87,10 +87,10 @@ const getData = () => {
   });
 };
 
-const getDataForTesting = (username, password) => {
+const getDataForTesting = (sectionYear, semester, username, sessionId) => {
     const data = {
-        sectionYear: '2023',
-        semester: 'fall',
+        sectionYear: sectionYear,
+        semester: semester,
         teacherUserName: username,
         sessionId: sessionId
       };
