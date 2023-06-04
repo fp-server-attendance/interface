@@ -22,7 +22,7 @@ module.exports = function(document) {
   };
   
    const sendData = (username, password) => {
-    sendHttpRequest('POST', 'http://44.203.249.113:8080/teacher/authenticate', {
+    sendHttpRequest('POST', 'http://44.202.194.46:8080/teacher/authenticate', {
       username: username,
       password: password
     })
@@ -34,7 +34,7 @@ module.exports = function(document) {
           // directing to mainPage with user credentials if login is succesfull
           window.location.href = './mainPage.html?username=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(responseData.sessionId)}';
         } else {
-          alert('Please check your login information.');
+          //console.log('Please check your login information.');
         }
       })
       .catch(err => {
@@ -43,7 +43,7 @@ module.exports = function(document) {
   };
   
   const sendDataForTesting = (username, password) => {
-    return sendHttpRequest('POST', 'http://44.203.249.113:8080/teacher/authenticate', {
+    return sendHttpRequest('POST', 'http://44.202.194.46:8080/teacher/authenticate', {
       username: username,
       password: password
     })
@@ -60,7 +60,7 @@ module.exports = function(document) {
       });
   };
   const sendDataForSessionID = (username, password) => {
-    return sendHttpRequest('POST', 'http://44.203.249.113:8080/teacher/authenticate', {
+    return sendHttpRequest('POST', 'http://44.202.194.46:8080/teacher/authenticate', {
       username: username,
       password: password
     })

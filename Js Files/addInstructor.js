@@ -1,18 +1,10 @@
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
-
-// Now you can use `window` and `document` from `jsdom`
-const { window } = new JSDOM(``, { url: "http://44.202.194.46" });
-const { document } = window;
-
 window.addEventListener('load', function () {
     const currDate = document.getElementById("currDate");
     const date = new Date();
     currDate.innerHTML = date.toLocaleDateString();
-
   });
 
-const submitBtn = document.getElementById('submitLecture-btn');
+const submitBtn = document.getElementById('submitInstructor-btn');
 
 const { username, sessionId } = getQueryParams();
 
@@ -45,40 +37,28 @@ const sendHttpRequest = (method, url, data) => {
     });
 };
 
-const sendDataForAddLecture = (coursecode, department, coursename, username, sessionId) => {
-    return sendHttpRequest('POST', 'http://44.202.194.46:8080/course/add', { 
-        courseCode: coursecode,
-        department: department,
-        name: coursename,
-        adminUserName: username,
-        sessionId: sessionId
+
+const sendData = (name, password) => {
+    sendHttpRequest('POST', 'http://44.202.194.46:8080/teacher/add', {  
+        username: name,
+        password: password
     })
       .then(responseData => {
-        if (responseData.success) {
-            return true;
-        } else {
-            return false;
-        }
+        console.log(responseData);
       })
       .catch(err => {
-        //console.log(err, err.data);
-        return false;
+        console.log(err, err.data);
       });
 };
 
 
-// get login parameters from login.js and use it here to get the courses of a user
-function getQueryParams() {
-  const search = window.location.search.substring(1);
-  const queryParams = new URLSearchParams(search);
 
-  return {
-    username: queryParams.get('username'),
-    sessionId: queryParams.get('sessionId')
-  };
-}
-
-module.exports = {
-    sendHttpRequest,
-    sendDataForAddLecture
-};
+// get data from html page
+submitBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+  
+    const nameInput = document.querySelector('input[name="name"]');
+    const passwordInput = document.querySelector('input[name="password"]');
+    // send data to sendData
+    sendData(nameInput.value, passwordInput.value);
+});

@@ -1,10 +1,20 @@
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+
+// Now you can use `window` and `document` from `jsdom`
+const { window } = new JSDOM(``, { url: "http://44.202.194.46" });
+const { document } = window;
+
+
 window.addEventListener('load', function () {
     const currDate = document.getElementById("currDate");
     const date = new Date();
     currDate.innerHTML = date.toLocaleDateString();
   });
 
+
 const submitBtn = document.getElementById('submitStudent-btn');
+
 
 const { username, sessionId } = getQueryParams();
 
@@ -37,83 +47,31 @@ const sendHttpRequest = (method, url, data) => {
     });
 };
 
-// Converting file to base64string to send to the server
-// Get a reference to the file input
-const fileInput = document.getElementById('myfile');
-var base64String;
-// Listen for the change event so we can capture the file
-fileInput.addEventListener('change', (e) => {
-    // Get a reference to the file
-    const file = e.target.files[0];
-
-    // Encode the file using the FileReader API
-    const reader = new FileReader();
-    reader.onloadend = () => {
-        // Use a regex to remove data url part
-        base64String = reader.result
-            .replace('data:', '')
-            .replace(/^.+,/, '');
-
-        console.log(base64String);
-        console.log(typeof(base64String));
-        // Logs wL2dvYWwgbW9yZ...
-    };
-    reader.readAsDataURL(file);
-});
-
-const sendData = (studentNo, name, surname, base64String) => {
-    sendHttpRequest('POST', 'http://44.203.249.113:8080/student/add', {
-        studentNumber: studentNo,
-        name: name,
-        surname: surname,
-        adminUserName: username,
-        sessionId: sessionId,
-        fingerprintImage: base64String
+const sendDataForAddStudent = (studentNo, name, surname, username, sessionId, base64String) => {
+  return sendHttpRequest('POST', 'http://44.202.194.46:8080/student/add', {
+      studentNumber: studentNo,
+      name: name,
+      surname: surname,
+      adminUserName: username,
+      sessionId: sessionId,
+      fingerprintImage: base64String
+  })
+    .then(responseData => {
+      if (responseData.success) {
+          return true;
+      } else {
+          return false;
+      }
     })
-      .then(responseData => {
-        console.log(responseData);
-      })
-      .catch(err => {
-        console.log(err, err.data);
-      });
-};
-
-const sendDataForTesting = (studentNo, name, surname, username, sessionId, base64String) => {
-    sendHttpRequest('POST', 'http://44.203.249.113:8080/student/add', {
-        studentNumber: studentNo,
-        name: name,
-        surname: surname,
-        adminUserName: username,
-        sessionId: sessionId,
-        fingerprintImage: base64String
-    })
-      .then(responseData => {
-        if (responseData.success) {
-            return responseData.success;
-        } else {
-            return false;
-        }
-      })
-      .catch(err => {
-        console.log(err, err.data);
-      });
+    .catch(err => {
+      //console.log(err, err.data);
+      return false; // Ensure a value is returned even when an error occurs
+    });
 };
 
 
-
-// get data from html page
-submitBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-  
-    const studentNoInput = document.querySelector('input[name="studentNo"]');
-    const nameInput = document.querySelector('input[name="name"]');
-    const surnameInput = document.querySelector('input[name="surname"]');
-    // send data to sendData
-    sendData(studentNoInput.value, nameInput.value, surnameInput.value, base64String);
-});
 
 module.exports = {
     sendHttpRequest,
-    sendData,
-    sendDataForTesting
+    sendDataForAddStudent
 };

@@ -9,10 +9,9 @@ window.addEventListener('load', function () {
     const currDate = document.getElementById("currDate");
     const date = new Date();
     currDate.innerHTML = date.toLocaleDateString();
-
   });
 
-const submitBtn = document.getElementById('submitLecture-btn');
+const submitBtn = document.getElementById('submitInstructor-btn');
 
 const { username, sessionId } = getQueryParams();
 
@@ -45,13 +44,11 @@ const sendHttpRequest = (method, url, data) => {
     });
 };
 
-const sendDataForAddLecture = (coursecode, department, coursename, username, sessionId) => {
-    return sendHttpRequest('POST', 'http://44.202.194.46:8080/course/add', { 
-        courseCode: coursecode,
-        department: department,
-        name: coursename,
-        adminUserName: username,
-        sessionId: sessionId
+
+const sendDataForInstructor = (name, password) => {
+    return sendHttpRequest('POST', 'http://44.202.194.46:8080/teacher/add', {  
+        username: name,
+        password: password
     })
       .then(responseData => {
         if (responseData.success) {
@@ -67,18 +64,7 @@ const sendDataForAddLecture = (coursecode, department, coursename, username, ses
 };
 
 
-// get login parameters from login.js and use it here to get the courses of a user
-function getQueryParams() {
-  const search = window.location.search.substring(1);
-  const queryParams = new URLSearchParams(search);
-
-  return {
-    username: queryParams.get('username'),
-    sessionId: queryParams.get('sessionId')
-  };
-}
-
 module.exports = {
     sendHttpRequest,
-    sendDataForAddLecture
+    sendDataForInstructor
 };

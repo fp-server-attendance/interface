@@ -2,7 +2,7 @@ const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
 // Now you can use `window` and `document` from `jsdom`
-const { window } = new JSDOM(``, { url: "http://44.203.249.113" });
+const { window } = new JSDOM(``, { url: "http://44.202.194.46" });
 const { document } = window;
 
 
@@ -38,55 +38,6 @@ const sendHttpRequest = (method, url, data) => {
 
 const { username, sessionId } = getQueryParams();
 
-const getData = () => {
-  const data = {
-    sectionYear: '2023',
-    semester: 'fall',
-    teacherUserName: username,
-    sessionId: sessionId
-  };
-  sendHttpRequest('POST', `http://44.203.249.113:8080/teacher/courses`, data)
-  .then(responseData => {
-    console.log(username, sessionId)
-    console.log(responseData);
-    const courseData = responseData.courses;
-
-    // Extract the course IDs and names into an array of objects
-    const courses = Object.keys(courseData).map(courseId => ({
-      id: courseId,
-      name: courseData[courseId]
-    }));
-
-    console.log(courses);
-
-    // Use the course data to populate the container
-    const container = document.createElement("div");
-    container.className = "course-container";
-
-    // add course data to the container as separate mini containers.
-    for (let i = 0; i < courses.length; i++) {
-      const courseDiv = document.createElement("div");
-      courseDiv.className = "mini-container";
-
-      const courseTitle = document.createElement("h2");
-      courseTitle.innerHTML = `${courses[i].id} - ${courses[i].name}`;
-      courseDiv.appendChild(courseTitle);
-
-      const attendanceButton = document.createElement("button");
-      attendanceButton.innerHTML = "Start Attendance";
-      attendanceButton.addEventListener('click', goToAttendancePage);
-      courseDiv.appendChild(attendanceButton);
-
-      container.appendChild(courseDiv);
-    }
-
-    // Now, add the newly created container with course data, to a div.
-    const divShowData = document.getElementById('showData');
-    divShowData.innerHTML = "";
-    divShowData.appendChild(container);
-  });
-};
-
 const getDataForTesting = (sectionYear, semester, username, sessionId) => {
     const data = {
         sectionYear: sectionYear,
@@ -94,7 +45,7 @@ const getDataForTesting = (sectionYear, semester, username, sessionId) => {
         teacherUserName: username,
         sessionId: sessionId
       };
-    return sendHttpRequest('POST', `http://44.203.249.113:8080/teacher/courses`, data)
+    return sendHttpRequest('POST', `http://44.202.194.46:8080/teacher/courses`, data)
       .then(responseData => {
         if (responseData.success) {
           return responseData.success;
@@ -124,6 +75,5 @@ function getQueryParams() {
 }
 module.exports = {
     sendHttpRequest,
-    getData,
     getDataForTesting
   };

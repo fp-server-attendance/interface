@@ -1,9 +1,16 @@
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+
+// Now you can use `window` and `document` from `jsdom`
+const { window } = new JSDOM(``, { url: "http://44.202.194.46" });
+const { document } = window;
+
 window.addEventListener('load', function () {
     const currDate = document.getElementById("currDate");
     const date = new Date();
     currDate.innerHTML = date.toLocaleDateString();
 
-  });
+  }); 
 
 const submitBtn = document.getElementById('submitSection-btn');
 
@@ -38,26 +45,8 @@ const sendHttpRequest = (method, url, data) => {
     });
 };
 
-const sendData = (coursecode, sectionYear, sectionNumber, semester, teacherUserName) => {
-    sendHttpRequest('POST', 'http://44.203.249.113:8080/course/section/add', {
-        courseID: coursecode,
-        sectionYear: sectionYear,
-        sectionNumber: sectionNumber,
-        semester: semester,
-        teacherUserName: teacherUserName, 
-        adminUserName: username,
-        sessionId: sessionId
-    })
-      .then(responseData => {
-        console.log(responseData);
-      })
-      .catch(err => {
-        console.log(err, err.data);
-      });
-};
-
-const sendDataForTesting = (coursecode, sectionYear, sectionNumber, semester, teacherUserName) => {
-    sendHttpRequest('POST', 'http://44.203.249.113:8080/course/section/add', {
+const sendDataForSection = (coursecode, sectionYear, sectionNumber, semester, teacherUserName, username, sessionId) => {
+    return sendHttpRequest('POST', 'http://44.202.194.46:8080/course/section/add', {
         courseID: coursecode,
         sectionYear: sectionYear,
         sectionNumber: sectionNumber,
@@ -74,9 +63,11 @@ const sendDataForTesting = (coursecode, sectionYear, sectionNumber, semester, te
         }
       })
       .catch(err => {
-        console.log(err, err.data);
+        //console.log(err, err.data);
+        return false; // You need to return false here
       });
 };
+
 
 // get login parameters from login.js and use it here to get the courses of a user
 function getQueryParams() {
@@ -89,22 +80,7 @@ function getQueryParams() {
   };
 }
 
-// get data from html page
-submitBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-  
-    const courseCodeInput = document.querySelector('input[name="courseCode"]');
-    const sectionYearInput = document.querySelector('input[name="sectionYear"]');
-    const sectionNumberInput = document.querySelector('input[name="sectionNumber"]');
-    const semesterInput = document.querySelector('input[name="semester"]');
-    const teacherUserNameInput = document.querySelector('input[name="teacherUserName"]');
-
-    // send data to sendData
-    sendData(courseCodeInput.value, sectionYearInput.value, sectionNumberInput.value, semesterInput.value, teacherUserNameInput.value);
-});
-
 module.exports = {
     sendHttpRequest,
-    sendData,
-    sendDataForTesting
+    sendDataForSection
 };

@@ -132,7 +132,7 @@ fileInput.addEventListener('change', (e) => {
 });
 
 const sendData = () => {
-  sendHttpRequest('POST', 'http://54.174.149.55:8080/attendance/schedule', {
+  sendHttpRequest('POST', 'http://44.203.249.113:8080/attendance/schedule_fingerprint_image', {
     encodedImage: base64String
   })
     .then(responseData => {
