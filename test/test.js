@@ -377,7 +377,7 @@ describe('Attendance Page Tests', () => {
 
     // using nock library to stimulate server responses
     nock(serverIP)
-      .post('/attendance/get_details', {attendanceId, teacherUserName, sessionId, encodedImage})
+      .post('/attendance/schedule_fingerprint_image', {attendanceId, teacherUserName, sessionId, encodedImage})
       .reply(404, { success: true });
 
     // Exercise
@@ -394,7 +394,7 @@ describe('Attendance Page Tests', () => {
 
     // using nock library to stimulate server responses
     nock(serverIP)
-      .post('/attendance/get_details', {attendanceId, teacherUserName, sessionId, encodedImage})
+      .post('/attendance/schedule_fingerprint_image', {attendanceId, teacherUserName, sessionId, encodedImage})
       .reply(404, { success: false });
 
     // Exercise

@@ -90,3 +90,11 @@ submitBtn.addEventListener('click', (event) => {
     // send data to sendData
     sendData(studentNoInput.value, nameInput.value, surnameInput.value, base64String);
 });
+
+const goAdminbtn = document.getElementById('go-adminPage-btn');
+
+// event listener to send parameters from mainPage to adminPage
+goAdminbtn.addEventListener('click', (event) => {
+  event.preventDefault();
+  window.location.href = `./adminPage.html?username=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(sessionId)}`;
+});

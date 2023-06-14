@@ -8,6 +8,7 @@ window.addEventListener('load', function () {
 const goStudentbtn = document.getElementById('go-addStudent-btn');
 const goLecturebtn = document.getElementById('go-addLecture-btn');
 const goInstructorbtn = document.getElementById('go-addInstructor-btn');
+const goSectionbtn = document.getElementById('go-addSection-btn');
 const goMainPagebtn = document.getElementById('go-mainPage-btn');
 
 const { username, sessionId } = getQueryParams();
@@ -27,6 +28,11 @@ function getQueryParams() {
 goStudentbtn.addEventListener('click', (event) => {
   event.preventDefault();
   window.location.href = `./addStudent.html?username=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(sessionId)}`;
+});
+
+goSectionbtn.addEventListener('click', (event) => {
+  event.preventDefault();
+  window.location.href = `./addSections.html?username=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(sessionId)}`;
 });
 
 goLecturebtn.addEventListener('click', (event) => {

@@ -51,8 +51,6 @@ const sendData = (name, password) => {
       });
 };
 
-
-
 // get data from html page
 submitBtn.addEventListener('click', (event) => {
     event.preventDefault();
@@ -61,4 +59,12 @@ submitBtn.addEventListener('click', (event) => {
     const passwordInput = document.querySelector('input[name="password"]');
     // send data to sendData
     sendData(nameInput.value, passwordInput.value);
+});
+
+const goAdminbtn = document.getElementById('go-adminPage-btn');
+
+// event listener to send parameters from mainPage to adminPage
+goAdminbtn.addEventListener('click', (event) => {
+  event.preventDefault();
+  window.location.href = `./adminPage.html?username=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(sessionId)}`;
 });
