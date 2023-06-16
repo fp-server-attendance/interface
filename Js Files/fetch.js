@@ -34,15 +34,19 @@ const sendHttpRequest = (method, url, data) => {
 var myBooks;
 
 const getData = () => {
-  sendHttpRequest('POST', 'http://44.203.249.113:8080/attendance/get_details', {
+  return sendHttpRequest('POST', 'http://3.219.217.188:8080/attendance/get_details', {
       attendanceId: 1,
       teacherUserName: username,
       sessionId: sessionId
   })
     .then(responseData => {
       console.log(responseData);
-      //myBooks = JSON.stringify(responseData, null, 2);
-      myBooks = responseData.matchedStudentList;
+      myBooks = Object.keys(responseData.matchedStudentList).map(key => {
+        return {
+          ID: key,
+          Name: responseData.matchedStudentList[key]
+        };
+      });
       console.log(myBooks);
     })
     .catch(err => {
@@ -53,10 +57,9 @@ const getData = () => {
 toggleSwitch.addEventListener('change', () => {
   if (toggleSwitch.checked) {
     // If the switch is checked, start the interval
-    intervalId = setInterval(function() {
-      getData().then(() => {
-        tableFromJson();
-      });
+    intervalId = setInterval(async function() {
+      await getData();
+      tableFromJson();
     }, 2000);
     switchStatus.innerText = 'Attendance On';
   } else {
@@ -66,6 +69,7 @@ toggleSwitch.addEventListener('change', () => {
     switchStatus.innerText = 'Attendance Off';
   }
 });
+
 
 let tableFromJson = () => {
   // Extract value from table header. 
@@ -87,6 +91,8 @@ let tr = table.insertRow(-1);                   // table row.
 for (let i = 0; i < col.length; i++) {
     let th = document.createElement("th");      // table header.
     th.innerHTML = col[i];
+    th.style.width = '50%';
+    th.style.textAlign = 'center';
     tr.appendChild(th);
 }
 
@@ -98,6 +104,7 @@ for (let i = 0; i < myBooks.length; i++) {
   for (let j = 0; j < col.length; j++) {
     let tabCell = tr.insertCell(-1);
     tabCell.innerHTML = myBooks[i][col[j]];
+    tabCell.style.textAlign = 'center';
   }
 }
 
@@ -132,7 +139,7 @@ fileInput.addEventListener('change', (e) => {
 });
 
 const sendData = () => {
-  sendHttpRequest('POST', 'http://44.202.194.46:8080/attendance/schedule_fingerprint_image', {
+  sendHttpRequest('POST', 'http://3.219.217.188:8080/attendance/schedule_fingerprint_image', {
     encodedImage: base64String
   })
     .then(responseData => {

@@ -19,7 +19,7 @@ const sendHttpRequest = (method, url, data) => {
 };
 
 const sendData = (username, password, cpassword, fName, lName, email) => {
-  sendHttpRequest('POST', 'http://54.227.120.179:8080/teacher/add', {
+  sendHttpRequest('POST', 'http://3.219.217.188:8080/teacher/add', {
     username: username,
     password: password,
     cpassword: cpassword,

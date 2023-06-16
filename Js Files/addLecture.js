@@ -39,7 +39,7 @@ const sendHttpRequest = (method, url, data) => {
 };
 
 const sendData = (coursecode, department, coursename) => {
-    sendHttpRequest('POST', 'http://44.203.249.113:8080/course/add', {
+    sendHttpRequest('POST', 'http://3.219.217.188:8080/course/add', {
         courseCode: coursecode,
         department: department,
         name: coursename,
