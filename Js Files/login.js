@@ -21,7 +21,7 @@ const sendHttpRequest = (method, url, data) => {
 };
 
  const sendData = (username, password) => {
-  sendHttpRequest('POST', 'http://3.219.217.188:8080/teacher/authenticate', {
+  sendHttpRequest('POST', 'http://44.203.82.26:8080/teacher/authenticate', {
     username: username,
     password: password
   })

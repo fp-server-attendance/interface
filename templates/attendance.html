@@ -24,8 +24,13 @@
         </label>        
         <span id="switch-status">Attendance Off</span>  
         <button id="send-fingerprint-btn" class="attendancebtn">Upload Fingerprint</button>
-        <button type="button" onclick="tableToCSV()">Download .CSV File</button>
         <input type="file" id="myfile" name="myfile">
+        <button type="button" onclick="tableToCSV()">Download .CSV File</button>
+        <div class="student-input">
+            <label>Student Number: </label>
+            <input type="text" placeholder="Enter Student Number" name="studentNo">
+            <button type="button" class="submitbtn">Mark Student</button>
+        </div>
     </div>
 </body>
 </html>

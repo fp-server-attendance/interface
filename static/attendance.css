@@ -1,160 +1,155 @@
 html, body {
-    margin: 0; padding: 0; border: 0;
+  margin: 0; padding: 0; border: 0;
 }
 body {
-    background-color: #BFBFBF
+  background-color: #BFBFBF
 }
 .top {
-    position: fixed;
-    padding: 30px;
-    width: 100%;
-    font-weight: bold;
-    height: 3%;
-    top: 0;
-    background: #333E50;
-    font-size: 25px;
-    color: white;
+  position: fixed;
+  padding: 30px;
+  width: 100%;
+  font-weight: bold;
+  height: 3%;
+  top: 0;
+  background: #333E50;
+  font-size: 25px;
+  color: white;
 }
 .currDate{
-    font-size: 20px;
-    color: white;
-    position: fixed;
-    top: 90%;
-    width: 100%;
-    padding: 25px;
-    bottom: 0;
-    background: #333E50;
+  font-size: 20px;
+  color: white;
+  position: fixed;
+  top: 90%;
+  width: 100%;
+  padding: 25px;
+  bottom: 0;
+  background: #333E50;
 }
 .container{
-    position: fixed;
-    color: white;
-    top: 15%;
-    right: 31.8%;
-    left: 31.8%;
-    font-size: 20px;
-    padding: 25px;
-    background-color: #333E50;
-    border: 3px solid black;
+  position: fixed;
+  color: white;
+  top: 12%;
+  right: 20.8%;
+  left: 20.8%;
+  font-size: 20px;
+  padding: 25px;
+  background-color: #333E50;
+  border: 3px solid black;
 }
 button{
-    background-color: #AD0E24;
-    color: white;
-    width: auto;
-    padding: 10px 18px;
-    margin: 10px 0;
-    cursor: pointer;
+  background-color: #AD0E24;
+  color: white;
+  width: auto;
+  padding: 10px 18px;
+  margin: 10px 0;
+  cursor: pointer;
 }
-input[type=text], input[type=password] {
-    width: 100%;
-    margin: 8px 0;
-    padding: 12px 20px;
-    display: inline-block;
-    border: 2px solid #BFBFBF;
-    box-sizing: border-box;
+.student-input {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center; /* this will vertically center the items */
+}
+.student-input input[type=text], input[type=password] {
+  width: 48%;
+  margin: 8px 0;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 2px solid #BFBFBF;
+  box-sizing: border-box;
+  margin-right: 7.8%;
+}
+.student-input label {
+  margin-right: 2%;
 }
 button:hover{
-    opacity: 0.75;
+  opacity: 0.75;
 }
 .attendancebtn {
-    width: auto;
-    padding: 10px 18px;
-    margin: 10px 10px;
+  width: auto;
+  padding: 10px 18px;
+  margin: 10px 10px;
 }
 .logoutbtn{
-    line-height: 12px;
-    width: 100px;
-    font-size: 15px;
-    font-family: tahoma;
-    margin-top: 1px;
-    margin-right: 2px;
-    position:fixed;
-    top:3%;
-    right:3%;
+  line-height: 12px;
+  width: 100px;
+  font-size: 15px;
+  font-family: tahoma;
+  margin-top: 1px;
+  margin-right: 2px;
+  position:fixed;
+  top:3%;
+  right:3%;
 }
 .mainPagebtn{
-    line-height: 12px;
-    width: 150px;
-    font-size: 15px;
-    font-family: tahoma;
-    margin-top: 1px;
-    margin-right: 2px;
-    position:fixed;
-    top:3%;
-    right:10%;
-}
-.counterCell:before {
-    content: counter(tableCount);
-    counter-increment: tableCount;
+  line-height: 12px;
+  width: 150px;
+  font-size: 15px;
+  font-family: tahoma;
+  margin-top: 1px;
+  margin-right: 2px;
+  position:fixed;
+  top:3%;
+  right:10%;
 }
 .scrollit {
-    background-color: white;
-    color: black;
-    overflow:scroll;
-    height:250px;
-}
-
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-.switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
   background-color: white;
-  transition: .4s;
+  color: black;
+  overflow:scroll;
+  height:250px;
 }
-
+.switch {
+position: relative;
+display: inline-block;
+width: 60px;
+height: 34px;
+}
+.switch input { 
+opacity: 0;
+width: 0;
+height: 0;
+}
+.slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #ccc;
+transition: .4s;
+}
+.slider:before {
+position: absolute;
+content: "";
+height: 26px;
+width: 26px;
+left: 4px;
+bottom: 4px;
+background-color: white;
+transition: .4s;
+}
 input:checked + .slider {
-  background-color: #AD0E24;
+background-color: #AD0E24;
 }
-
 input:focus + .slider {
-  box-shadow: 0 0 1px #AD0E24;
+box-shadow: 0 0 1px #AD0E24;
 }
-
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+-webkit-transform: translateX(26px);
+-ms-transform: translateX(26px);
+transform: translateX(26px);
 }
-
 .slider.round {
-  border-radius: 34px;
+border-radius: 34px;
 }
-
 .slider.round:before {
-  border-radius: 50%;
+border-radius: 50%;
 }
 table {
-  width: 80%; /* Change this to suit your needs */
-  margin-left: auto;
-  margin-right: auto;
+width: 80%; /* Change this to suit your needs */
+margin-left: auto;
+margin-right: auto;
 }
 th, td {
-  text-align: center; 
+text-align: center; 
 }
-  

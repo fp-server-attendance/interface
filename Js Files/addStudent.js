@@ -62,7 +62,7 @@ fileInput.addEventListener('change', (e) => {
 });
 
 const sendData = (studentNo, name, surname, base64String) => {
-    sendHttpRequest('POST', 'http://3.219.217.188:8080/student/add', {
+    sendHttpRequest('POST', 'http://44.203.82.26:8080/student/add', {
         studentNumber: studentNo,
         name: name,
         surname: surname,

@@ -34,7 +34,7 @@ const sendHttpRequest = (method, url, data) => {
 var myBooks;
 
 const getData = () => {
-  return sendHttpRequest('POST', 'http://3.219.217.188:8080/attendance/get_details', {
+  return sendHttpRequest('POST', 'http://44.203.82.26:8080/attendance/get_details', {
       attendanceId: 1,
       teacherUserName: username,
       sessionId: sessionId
@@ -139,7 +139,7 @@ fileInput.addEventListener('change', (e) => {
 });
 
 const sendData = () => {
-  sendHttpRequest('POST', 'http://3.219.217.188:8080/attendance/schedule_fingerprint_image', {
+  sendHttpRequest('POST', 'http://44.203.82.26:8080/attendance/schedule_fingerprint_image', {
     encodedImage: base64String
   })
     .then(responseData => {

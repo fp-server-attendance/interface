@@ -35,7 +35,7 @@ const getData = () => {
     teacherUserName: username,
     sessionId: sessionId
   };
-  sendHttpRequest('POST', `http://3.219.217.188:8080/teacher/courses`, data)
+  sendHttpRequest('POST', `http://44.203.82.26:8080/teacher/courses`, data)
   .then(responseData => {
     console.log(username, sessionId)
     console.log(responseData);
