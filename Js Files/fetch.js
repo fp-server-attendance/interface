@@ -6,11 +6,15 @@ window.addEventListener('load', function () {
 
 const postBtn = document.getElementById('send-fingerprint-btn');
 
-const { username, sessionId } = getQueryParams();
+const { username, sessionId, attendanceId } = getQueryParams();
 
 let intervalId = null;
 const toggleSwitch = document.getElementById('toggle-switch');
 const switchStatus = document.getElementById('switch-status');
+
+// get student number from html
+let studentNoInput = document.querySelector("input[name='studentNo']");
+let studentNumber = studentNoInput.value;
 
 //const jsonToTable = require('json-to-table');
 
@@ -35,7 +39,7 @@ var myBooks;
 
 const getData = () => {
   return sendHttpRequest('POST', 'http://44.203.82.26:8080/attendance/get_details', {
-      attendanceId: 1,
+      attendanceId: attendanceId,
       teacherUserName: username,
       sessionId: sessionId
   })
@@ -140,7 +144,38 @@ fileInput.addEventListener('change', (e) => {
 
 const sendData = () => {
   sendHttpRequest('POST', 'http://44.203.82.26:8080/attendance/schedule_fingerprint_image', {
+    attendanceId: attendanceId,
+    teacherUserName: username,
+    sessionId: sessionId,
     encodedImage: base64String
+  })
+    .then(responseData => {
+      console.log(responseData);
+    })
+    .catch(err => {
+      console.log(err, err.data);
+    });
+};
+
+// Get reference to the button
+const submitBtn = document.querySelector('.submitbtn');
+
+// Add event listener to the button
+submitBtn.addEventListener('click', function() {
+  // Get the input value every time the button is clicked
+  let studentNumber = studentNoInput.value;
+
+  // Call the markStudentManually function
+  markStudentManually(studentNumber);
+});
+
+// sending student number to server to mark as attended
+const markStudentManually = (studentNumber) => {
+  sendHttpRequest('POST', 'http://44.203.82.26:8080/attendance/mark_as_here', {
+    attendanceId: attendanceId,
+    studentNumber: studentNumber,
+    teacherUserName: username,
+    sessionId: sessionId
   })
     .then(responseData => {
       console.log(responseData);
@@ -218,10 +253,17 @@ function getQueryParams() {
 
   return {
     username: queryParams.get('username'),
-    sessionId: queryParams.get('sessionId')
+    sessionId: queryParams.get('sessionId'),
+    attendanceId: queryParams.get('attendanceId')
   };
 }
 
+const goMainPagebtn = document.getElementById('go-mainPage-btn');
 
+// event listener to send parameters from mainPage to adminPage
+goMainPagebtn.addEventListener('click', (event) => {
+  event.preventDefault();
+  window.location.href = `./mainPage.html?username=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(sessionId)}`;
+});
 
 postBtn.addEventListener('click', sendData);

@@ -1,5 +1,6 @@
 html, body {
     margin: 0; padding: 0; border: 0;
+    font-family: 'Bahnschrift';
 }
 body {
     background-color: #BFBFBF
@@ -77,6 +78,7 @@ button{
     padding: 10px 18px;
     margin: 10px 0;
     cursor: pointer;
+    font-family: 'Bahnschrift';
 }
 
 .containerButton{
@@ -89,6 +91,7 @@ button{
     position: absolute;
     bottom: 0px;
     left: 20px;
+    font-family: 'Bahnschrift';
 }
 
 
@@ -114,6 +117,7 @@ button:hover{
     position:fixed;
     top:3%;
     right:3%;
+    font-family: 'Bahnschrift';
 }
 .mainPagebtn{
     line-height: 12px;
@@ -125,6 +129,7 @@ button:hover{
     position:fixed;
     top:3%;
     right:10%;
+    font-family: 'Bahnschrift';
 }
 .counterCell:before {
     content: counter(tableCount);

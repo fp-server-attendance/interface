@@ -1,5 +1,6 @@
 html, body {
     margin: 0; padding: 0; border: 0;
+    font-family: 'Bahnschrift';
 }
 body {
     background-color: #BFBFBF
@@ -61,6 +62,7 @@ button{
     padding: 10px 18px;
     margin: 10px 0;
     cursor: pointer;
+    font-family: 'Bahnschrift';
 }
 input[type=text], input[type=password] {
     width: 100%;
@@ -77,6 +79,7 @@ button:hover{
     width: auto;
     padding: 10px 18px;
     margin: 10px 10px;
+    font-family: 'Bahnschrift';
 }
 .logoutbtn{
     line-height: 12px;
@@ -88,6 +91,7 @@ button:hover{
     position:fixed;
     top:3%;
     right:3%;
+    font-family: 'Bahnschrift';
 }
 .mainPagebtn{
     line-height: 12px;
@@ -99,6 +103,7 @@ button:hover{
     position:fixed;
     top:3%;
     right:10%;
+    font-family: 'Bahnschrift';
 }
 table {
     counter-reset: tableCount;

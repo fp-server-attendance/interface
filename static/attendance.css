@@ -1,5 +1,6 @@
 html, body {
   margin: 0; padding: 0; border: 0;
+  font-family: 'Bahnschrift';
 }
 body {
   background-color: #BFBFBF
@@ -35,6 +36,7 @@ body {
   padding: 25px;
   background-color: #333E50;
   border: 3px solid black;
+  font-family: 'Bahnschrift';
 }
 button{
   background-color: #AD0E24;
@@ -43,6 +45,7 @@ button{
   padding: 10px 18px;
   margin: 10px 0;
   cursor: pointer;
+  font-family: 'Bahnschrift';
 }
 .student-input {
   display: flex;
@@ -68,6 +71,8 @@ button:hover{
   width: auto;
   padding: 10px 18px;
   margin: 10px 10px;
+  font-family: 'Bahnschrift';
+  
 }
 .logoutbtn{
   line-height: 12px;
@@ -79,6 +84,7 @@ button:hover{
   position:fixed;
   top:3%;
   right:3%;
+  font-family: 'Bahnschrift';
 }
 .mainPagebtn{
   line-height: 12px;
@@ -90,6 +96,7 @@ button:hover{
   position:fixed;
   top:3%;
   right:10%;
+  font-family: 'Bahnschrift';
 }
 .scrollit {
   background-color: white;

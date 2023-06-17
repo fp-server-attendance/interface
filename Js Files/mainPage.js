@@ -6,6 +6,9 @@ window.addEventListener('load', function () {
     getData();
   });
 
+const currYear = '2023';
+const currSemester = 'SPRING'
+
 const goAdminbtn = document.getElementById('go-adminPage-btn');
 const getBtn = document.getElementById('get-lectures-btn');
 
@@ -30,8 +33,8 @@ const { username, sessionId } = getQueryParams();
 
 const getData = () => {
   const data = {
-    sectionYear: '2023',
-    semester: 'SPRING',
+    sectionYear: currYear,
+    semester: currSemester,
     teacherUserName: username,
     sessionId: sessionId
   };
@@ -64,10 +67,24 @@ const getData = () => {
 
       const attendanceButton = document.createElement("button");
       attendanceButton.innerHTML = "Start Attendance";
+      attendanceButton.style.marginRight = "10px";
+      getSectionList(courses[i].id).then(sections => {
+        const sectionSelect = document.createElement("select");
+        sectionSelect.style.marginLeft = "10px";
+        for (let j = 0; j < sections.length; j++) {
+          const option = document.createElement("option");
+          option.value = sections[j];
+          option.text = "Section " + sections[j];
+          sectionSelect.appendChild(option);
+        }
+        courseDiv.appendChild(sectionSelect);
+      });
       attendanceButton.addEventListener('click', goToAttendancePage);
       courseDiv.appendChild(attendanceButton);
 
       container.appendChild(courseDiv);
+
+      
     }
 
     // Now, add the newly created container with course data, to a div.
@@ -77,9 +94,56 @@ const getData = () => {
   });
 };
 
-function goToAttendancePage() {
-  window.location.href = `./attendance.html?username=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(sessionId)}`;
+function goToAttendancePage(event) {
+  // get course code and selected section from the event target's parent container
+  const courseDiv = event.target.parentNode;
+  const courseCode = courseDiv.querySelector('h2').textContent.split(' ')[0];
+  const sectionSelect = courseDiv.querySelector('select');
+  const selectedSection = sectionSelect.options[sectionSelect.selectedIndex].value;
+
+  // get attendance id
+  getDataAttendanceId(courseCode, selectedSection).then(attendanceId => {
+    window.location.href = `./attendance.html?username=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(sessionId)}&attendanceId=${encodeURIComponent(attendanceId)}`;
+  });
 }
+
+
+// getting attendance ID and sending with attendance
+const getSectionList = (courseCode) => {
+  return sendHttpRequest('POST', 'http://44.203.82.26:8080/course/section/list', {
+    courseCode: courseCode,
+    sectionYear: currYear,
+    semester: currSemester,
+    teacherUserName: username,
+    sessionId: sessionId
+  })
+    .then(responseData => {
+      console.log(responseData);
+      return responseData.sectionNumbers;
+    })
+    .catch(err => {
+      console.log(err, err.data);
+    });
+};
+
+// getting attendance ID and sending with attendance
+const getDataAttendanceId = (courseCode, sectionNumber) => {
+  return sendHttpRequest('POST', 'http://44.203.82.26:8080/attendance/add', {
+    courseCode: courseCode,
+    sectionNumber: sectionNumber,
+    sectionYear: currYear,
+    semester: currSemester,
+    teacherUserName: username,
+    sessionId: sessionId
+  })
+    .then(responseData => {
+      console.log(responseData);
+      return responseData.id;
+    })
+    .catch(err => {
+      console.log(err, err.data);
+    });
+};
 
 // get login parameters from login.js and use it here to get the courses of a user
 function getQueryParams() {
