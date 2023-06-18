@@ -38,7 +38,7 @@ const getData = () => {
     teacherUserName: username,
     sessionId: sessionId
   };
-  sendHttpRequest('POST', `http://44.203.82.26:8080/teacher/courses`, data)
+  sendHttpRequest('POST', `http://3.92.152.158:8080/teacher/courses`, data)
   .then(responseData => {
     console.log(username, sessionId)
     console.log(responseData);
@@ -64,10 +64,12 @@ const getData = () => {
       const courseTitle = document.createElement("h2");
       courseTitle.innerHTML = `${courses[i].id} - ${courses[i].name}`;
       courseDiv.appendChild(courseTitle);
-
+      //start attendance button
       const attendanceButton = document.createElement("button");
       attendanceButton.innerHTML = "Start Attendance";
       attendanceButton.style.marginRight = "10px";
+      //options for sections
+      // options for sections
       getSectionList(courses[i].id).then(sections => {
         const sectionSelect = document.createElement("select");
         sectionSelect.style.marginLeft = "10px";
@@ -78,9 +80,23 @@ const getData = () => {
           sectionSelect.appendChild(option);
         }
         courseDiv.appendChild(sectionSelect);
+
+        // Append courseDiv to container here
+        container.appendChild(courseDiv);
       });
+
       attendanceButton.addEventListener('click', goToAttendancePage);
       courseDiv.appendChild(attendanceButton);
+
+      //previous attendances button
+      const newButton = document.createElement("button");
+      newButton.innerHTML = "Previous Attendances";
+      newButton.style.marginRight = "10px";
+
+      // Attach event listener to the new button
+      newButton.addEventListener('click', goToPreviousAttendancePage);
+
+      courseDiv.appendChild(newButton);
 
       container.appendChild(courseDiv);
 
@@ -94,13 +110,23 @@ const getData = () => {
   });
 };
 
-function goToAttendancePage(event) {
+function goToPreviousAttendancePage(event) {
   // get course code and selected section from the event target's parent container
   const courseDiv = event.target.parentNode;
   const courseCode = courseDiv.querySelector('h2').textContent.split(' ')[0];
   const sectionSelect = courseDiv.querySelector('select');
   const selectedSection = sectionSelect.options[sectionSelect.selectedIndex].value;
 
+  window.location.href = `./previousAttendances.html?username=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(sessionId)}&courseCode=${encodeURIComponent(courseCode)}&selectedSection=${encodeURIComponent(selectedSection)}`;
+}
+
+function goToAttendancePage(event) {
+  // get course code and selected section from the event target's parent container
+  const courseDiv = event.target.parentNode;
+  const courseCode = courseDiv.querySelector('h2').textContent.split(' ')[0];
+  const sectionSelect = courseDiv.querySelector('select');
+  const selectedSection = sectionSelect.options[sectionSelect.selectedIndex].value;
+  
   // get attendance id
   getDataAttendanceId(courseCode, selectedSection).then(attendanceId => {
     window.location.href = `./attendance.html?username=${encodeURIComponent(username)}&sessionId=${encodeURIComponent(sessionId)}&attendanceId=${encodeURIComponent(attendanceId)}`;
@@ -110,7 +136,7 @@ function goToAttendancePage(event) {
 
 // getting attendance ID and sending with attendance
 const getSectionList = (courseCode) => {
-  return sendHttpRequest('POST', 'http://44.203.82.26:8080/course/section/list', {
+  return sendHttpRequest('POST', 'http://3.92.152.158:8080/course/section/list', {
     courseCode: courseCode,
     sectionYear: currYear,
     semester: currSemester,
@@ -128,7 +154,7 @@ const getSectionList = (courseCode) => {
 
 // getting attendance ID and sending with attendance
 const getDataAttendanceId = (courseCode, sectionNumber) => {
-  return sendHttpRequest('POST', 'http://44.203.82.26:8080/attendance/add', {
+  return sendHttpRequest('POST', 'http://3.92.152.158:8080/attendance/add', {
     courseCode: courseCode,
     sectionNumber: sectionNumber,
     sectionYear: currYear,

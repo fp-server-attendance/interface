@@ -160,3 +160,6 @@ margin-right: auto;
 th, td {
 text-align: center; 
 }
+.download-button {
+  margin-left: 150px;
+}

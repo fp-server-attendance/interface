@@ -38,7 +38,7 @@ const sendHttpRequest = (method, url, data) => {
 var myBooks;
 
 const getData = () => {
-  return sendHttpRequest('POST', 'http://44.203.82.26:8080/attendance/get_details', {
+  return sendHttpRequest('POST', 'http://3.92.152.158:8080/attendance/get_details', {
       attendanceId: attendanceId,
       teacherUserName: username,
       sessionId: sessionId
@@ -143,7 +143,7 @@ fileInput.addEventListener('change', (e) => {
 });
 
 const sendData = () => {
-  sendHttpRequest('POST', 'http://44.203.82.26:8080/attendance/schedule_fingerprint_image', {
+  sendHttpRequest('POST', 'http://3.92.152.158:8080/attendance/schedule_fingerprint_image', {
     attendanceId: attendanceId,
     teacherUserName: username,
     sessionId: sessionId,
@@ -171,7 +171,7 @@ submitBtn.addEventListener('click', function() {
 
 // sending student number to server to mark as attended
 const markStudentManually = (studentNumber) => {
-  sendHttpRequest('POST', 'http://44.203.82.26:8080/attendance/mark_as_here', {
+  sendHttpRequest('POST', 'http://3.92.152.158:8080/attendance/mark_as_here', {
     attendanceId: attendanceId,
     studentNumber: studentNumber,
     teacherUserName: username,

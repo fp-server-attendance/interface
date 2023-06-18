@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/attendance.css" type="text/css">
+    <script src="../Js Files/prevAttendance.js" defer></script>
+</head>
+<body>
+<div class="top">Previous Attendances </div>
+<div id="currDate" class="currDate"></div> 
+<a href="./login.html"><button type="button" class="logoutbtn">Logout</button></a>
+<button id="go-mainPage-btn" type="button" class="mainPagebtn">Go to main Page</button>
+    <div class="container">
+        <h1>Previous Attendance List</h1>
+        
+        <div class="scrollit">
+          <table id="showData" border="4"></table>
+        </div>
+               
+        <label class="switch">
+            <!-- Dropdown to select the attendance session -->
+            <select id="attendance-select" class="attendance-select">
+                <!-- Options will be populated by JavaScript -->
+            </select>
+        </label>
+        <button type="button" class="download-button" onclick="tableToCSV()">Download .CSV File</button>
+    </div>
+</body>
+</html>
