@@ -5,6 +5,7 @@ window.addEventListener('load', function () {
   });
 
 const submitBtn = document.getElementById('submitStudent-btn');
+const submitSectionBtn = document.getElementById('submitStudent-toSection-btn');
 
 const { username, sessionId } = getQueryParams();
 
@@ -62,7 +63,7 @@ fileInput.addEventListener('change', (e) => {
 });
 
 const sendData = (studentNo, name, surname, base64String) => {
-    sendHttpRequest('POST', 'http://3.92.152.158:8080/student/add', {
+    sendHttpRequest('POST', 'http://3.227.232.2:8080/student/add', {
         studentNumber: studentNo,
         name: name,
         surname: surname,
@@ -72,13 +73,16 @@ const sendData = (studentNo, name, surname, base64String) => {
     })
       .then(responseData => {
         console.log(responseData);
+        if (responseData.success) {
+          alert('Student was succesfully added to the database.');
+        } else {
+          alert('Failed to add.');
+        }
       })
       .catch(err => {
         console.log(err, err.data);
       });
 };
-
-
 
 // get data from html page
 submitBtn.addEventListener('click', (event) => {
@@ -89,6 +93,43 @@ submitBtn.addEventListener('click', (event) => {
     const surnameInput = document.querySelector('input[name="surname"]');
     // send data to sendData
     sendData(studentNoInput.value, nameInput.value, surnameInput.value, base64String);
+});
+
+const studentToSection = (courseCode, sectionNumber, sectionYear, semester, studentNumber) => {
+  sendHttpRequest('POST', 'http://3.227.232.2:8080/course/section/register_student', {
+      courseCode: courseCode,
+      sectionNumber: sectionNumber,
+      sectionYear: sectionYear,
+      semester: semester,
+      studentNumber: studentNumber,
+      adminUserName: username,
+      sessionId: sessionId
+  })
+    .then(responseData => {
+      console.log(responseData);
+      if (responseData.success) {
+        console.log(responseData.sessionId);
+        alert('Student was succesfully added to section.');
+      } else {
+        alert('Failed to add.');
+      }
+    })
+    .catch(err => {
+      console.log(err, err.data);
+    });
+};
+
+// get data from html page
+submitSectionBtn.addEventListener('click', (event) => {
+  event.preventDefault();
+
+  const courseCodeInput = document.querySelector('input[name="courseCode"]');
+  const sectionNoInput = document.querySelector('input[name="sectionNumber"]');
+  const sectionYearInput = document.querySelector('input[name="sectionYear"]');
+  const semesterInput = document.querySelector('input[name="semester"]');
+  const studentNoInput = document.querySelector('input[name="studentNumber"]');
+  // send data to sendData
+  studentToSection(courseCodeInput.value, sectionNoInput.value, sectionYearInput.value, semesterInput.value, studentNoInput.value);
 });
 
 const goAdminbtn = document.getElementById('go-adminPage-btn');

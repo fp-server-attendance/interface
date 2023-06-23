@@ -38,7 +38,7 @@ const getData = () => {
     teacherUserName: username,
     sessionId: sessionId
   };
-  sendHttpRequest('POST', `http://3.92.152.158:8080/teacher/courses`, data)
+  sendHttpRequest('POST', `http://3.227.232.2:8080/teacher/courses`, data)
   .then(responseData => {
     console.log(username, sessionId)
     console.log(responseData);
@@ -136,7 +136,7 @@ function goToAttendancePage(event) {
 
 // getting attendance ID and sending with attendance
 const getSectionList = (courseCode) => {
-  return sendHttpRequest('POST', 'http://3.92.152.158:8080/course/section/list', {
+  return sendHttpRequest('POST', 'http://3.227.232.2:8080/course/section/list', {
     courseCode: courseCode,
     sectionYear: currYear,
     semester: currSemester,
@@ -154,7 +154,7 @@ const getSectionList = (courseCode) => {
 
 // getting attendance ID and sending with attendance
 const getDataAttendanceId = (courseCode, sectionNumber) => {
-  return sendHttpRequest('POST', 'http://3.92.152.158:8080/attendance/add', {
+  return sendHttpRequest('POST', 'http://3.227.232.2:8080/attendance/add', {
     courseCode: courseCode,
     sectionNumber: sectionNumber,
     sectionYear: currYear,

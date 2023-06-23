@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../static/style.css" type="text/css">
+    <link rel="stylesheet" href="../static/addStudent.css" type="text/css">
     <script src="../Js Files/addStudent.js" defer></script>
 </head>
 <body>
@@ -11,16 +11,31 @@
 <div id="currDate" class="currDate"></div>
 <a href="./login.html"><button type="button" class="logoutbtn">Logout</button></a>
 <button id="go-adminPage-btn" type="button" class="mainPagebtn">Go to Admin Page</button>
-    <div class="containerAddEvent">
-        <label>Student Number : </label>
-        <input type="text" placeholder="Enter Student Number" name="studentNo" required>
-        <label>Name : </label>
-        <input type="text" placeholder="Enter Name" name="name" required>
-        <label>Surname : </label>
-        <input type="text" placeholder="Enter Surname" name="surname" required>
-        <label>Add Fingerprint : </label>
-        <input type="file" id="myfile" name="myfile">
-        <button id="submitStudent-btn" class="registerbtn">Submit Student</button>
+    <div class="container-flex">
+        <div class="containerAddEvent">
+            <label>Student Number : </label>
+            <input type="text" placeholder="Enter Student Number" name="studentNo" required>
+            <label>Name : </label>
+            <input type="text" placeholder="Enter Name" name="name" required>
+            <label>Surname : </label>
+            <input type="text" placeholder="Enter Surname" name="surname" required>
+            <label>Add Fingerprint : </label>
+            <input type="file" id="myfile" name="myfile">
+            <button id="submitStudent-btn" class="registerbtn">Submit Student</button>
+        </div>
+        <div class="containerRight">
+            <label>Course Code : </label>
+            <input type="text" placeholder="Enter Student Number" name="courseCode" required>
+            <label>Section Number : </label>
+            <input type="text" placeholder="Enter Name" name="sectionNumber" required>
+            <label>Section Year : </label>
+            <input type="text" placeholder="Enter Surname" name="sectionYear" required>
+            <label>Semester : </label>
+            <input type="text" placeholder="Enter Surname" name="semester" required>
+            <label>Student Number : </label>
+            <input type="text" placeholder="Enter Surname" name="studentNumber" required>
+            <button id="submitStudent-toSection-btn" class="registerbtn">Submit Student to Section</button>
+        </div>
     </div>
 </body>
 </html>

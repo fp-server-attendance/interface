@@ -50,6 +50,11 @@ const sendData = (coursecode, sectionYear, sectionNumber, semester, teacherUserN
     })
       .then(responseData => {
         console.log(responseData);
+        if (responseData.success) {
+          alert('Section was succesfully added to the database.');
+        } else {
+          alert('Failed to add.');
+        }
       })
       .catch(err => {
         console.log(err, err.data);

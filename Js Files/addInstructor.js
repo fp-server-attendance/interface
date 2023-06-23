@@ -45,6 +45,11 @@ const sendData = (name, password) => {
     })
       .then(responseData => {
         console.log(responseData);
+        if (responseData.success) {
+          alert('Instructor was succesfully added to the database.');
+        } else {
+          alert('Failed to add.');
+        }
       })
       .catch(err => {
         console.log(err, err.data);

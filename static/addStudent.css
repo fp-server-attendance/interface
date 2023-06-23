@@ -116,35 +116,22 @@ table {
     background: #333E50;
 }
 
-.containerAddEvent{
-    position: fixed;
-    color: white;
-    top: 15%;
-    right: 35%;
-    left: 35%;
-    font-size: 20px;
-    padding: 25px;
-    background-color: #333E50;
-    border: 3px solid black;
-}
-
-.containerRight {
-    position: fixed;
-    color: white;
-    top: 15%;
-    right: 5%;  /* Adjust as needed */
-    left: 65%;  /* Adjust as needed */
-    font-size: 20px;
-    padding: 25px;
-    background-color: #333E50;
-    border: 3px solid black;
-}
 .container-flex {
     display: flex;
-    justify-content: flex-start;  /* push to the left */
+    justify-content: space-around;  /* distribute items evenly */
     align-items: center;  /* vertically center */
     height: 100vh; /* takes full viewport height */
     padding: 0 20px;
+}
+
+.containerAddEvent, .containerRight {
+    width: 30%; /* or any other value that suits your needs */
+    color: white;
+    font-size: 20px;
+    padding: 25px;
+    background-color: #333E50;
+    border: 3px solid black;
+    margin: 20px 10px; /* add some space between containers */
 }
 
 .containerAddEvent, .containerRight {

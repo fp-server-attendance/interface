@@ -48,6 +48,11 @@ const sendData = (coursecode, department, coursename) => {
     })
       .then(responseData => {
         console.log(responseData);
+        if (responseData.success) {
+          alert('Lecture was succesfully added to the database.');
+        } else {
+          alert('Failed to add.');
+        }
       })
       .catch(err => {
         console.log(err, err.data);
