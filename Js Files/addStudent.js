@@ -63,7 +63,7 @@ fileInput.addEventListener('change', (e) => {
 });
 
 const sendData = (studentNo, name, surname, base64String) => {
-    sendHttpRequest('POST', 'http://3.227.232.2:8080/student/add', {
+    sendHttpRequest('POST', 'http://44.197.182.52:8080/student/add', {
         studentNumber: studentNo,
         name: name,
         surname: surname,
@@ -96,7 +96,7 @@ submitBtn.addEventListener('click', (event) => {
 });
 
 const studentToSection = (courseCode, sectionNumber, sectionYear, semester, studentNumber) => {
-  sendHttpRequest('POST', 'http://3.227.232.2:8080/course/section/register_student', {
+  sendHttpRequest('POST', 'http://44.197.182.52:8080/course/section/register_student', {
       courseCode: courseCode,
       sectionNumber: sectionNumber,
       sectionYear: sectionYear,

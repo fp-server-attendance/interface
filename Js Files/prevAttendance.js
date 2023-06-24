@@ -40,7 +40,7 @@ return fetch(url, {
 var myBooks;
 
 const getData = (attendanceId) => {
-return sendHttpRequest('POST', 'http://3.227.232.2:8080/attendance/get_details', {
+return sendHttpRequest('POST', 'http://44.197.182.52:8080/attendance/get_details', {
     attendanceId: attendanceId,
     teacherUserName: username,
     sessionId: sessionId
@@ -62,7 +62,7 @@ return sendHttpRequest('POST', 'http://3.227.232.2:8080/attendance/get_details',
 
 // get attendanceIds
 const getAttendanceId = () => {
-    return sendHttpRequest('POST', 'http://3.227.232.2:8080/attendance/get_attendance_list_of_section', {
+    return sendHttpRequest('POST', 'http://44.197.182.52:8080/attendance/get_attendance_list_of_section', {
         sectionNumber: selectedSection,
         sectionYear: currYear,
         courseCode: courseCode,
